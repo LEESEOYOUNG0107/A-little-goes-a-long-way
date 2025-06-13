@@ -14,9 +14,8 @@ def openDonation(frame, selectedDate=None):
         messagebox.showwarning("예산 없음", "예산이 설정되어 있지 않습니다. 먼저 예산을 설정해주세요.")
         return
 
-    # 현재 총 지출 계산 (budget.py의 calculate_total_expenses 함수 복사하거나 budget에 함수 추가 필요)
+    # 현재 총 지출 계산
     total_expenses = budget.calculate_total_expenses()
-
     remaining = current_budget - total_expenses
 
     if remaining <= 0:
@@ -39,18 +38,15 @@ def openDonation(frame, selectedDate=None):
 
         confirm = messagebox.askyesno("기부 확인", f"{amount:,}원을 기부하시겠습니까?")
         if confirm:
-            budget.deduct_from_budget(amount)  # 예산 차감
-            log_donation_as_expense(amount, selectedDate)  # ✅ 지출 로그에 기부 내역 저장
+            log_donation_as_expense(amount, selectedDate)  # ✅ 지출 로그에 기부 내역 저장만 수행
             messagebox.showinfo("감사합니다", f"{amount:,}원이 성공적으로 기부되었습니다!")
             home(frame)  # 화면 갱신
-
 
         else:
             messagebox.showinfo("취소", "기부가 취소되었습니다.")
 
     except ValueError:
         messagebox.showerror("입력 오류", "올바른 숫자(양의 정수)를 입력해주세요.")
-
 
 def home(frame):
     for widget in frame.winfo_children():
