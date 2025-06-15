@@ -3,8 +3,22 @@ from tkinter import messagebox, simpledialog
 import budget  # budget 모듈에서 load_budget, calculate_total_expenses 함수 필요
 import budget
 from datetime import datetime
+from PIL import Image, ImageTk
 
 from seoyoung.deposit import log_donation_as_expense
+from PIL import Image, ImageTk
+
+def homeImg(frame):
+    for widget in frame.winfo_children():
+        widget.destroy()
+
+    image = Image.open("home_img.png")  # 이미지 경로 맞게 수정
+    image = image.resize((900, 600))  # 필요시 크기 조절
+    photo = ImageTk.PhotoImage(image)
+
+    label = tk.Label(frame, image=photo)
+    label.image = photo  # 참조 유지
+    label.pack(pady=20)
 
 
 def openDonation(frame, selectedDate=None):
